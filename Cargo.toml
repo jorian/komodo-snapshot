@@ -1,6 +1,6 @@
 [package]
 name = "komodo_snapshot"
-version = "0.0.1"
+version = "0.1.0"
 edition = "2018"
 authors = ["Jorian <hey@jorian.dev>"]
 license = "MIT"
