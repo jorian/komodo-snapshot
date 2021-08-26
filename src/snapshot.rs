@@ -63,11 +63,8 @@ impl<'a> SnapshotBuilder<'a> {
         }?;
 
         if snapshot.addresses.is_empty() {
-            // return Err(ErrorKind::EmptySnapshot.into());
-            panic!("Empty snapshot!")
+            return Err(crate::error::ErrorKind::EmptySnapshot.into());
         }
-
-        dbg!(&snapshot.addresses.len());
 
         if self.threshold > 0.0 {
             snapshot.addresses = snapshot
@@ -138,7 +135,5 @@ mod tests {
             .using_threshold(1.0)
             .store_in_csv("./output.csv")
             .take();
-
-        dbg!(snapshot.unwrap().addresses.len());
     }
 }
