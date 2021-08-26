@@ -10,3 +10,5 @@ readme = "README.md"
 
 [dependencies]
 komodo-rpc = { path = "../rust-komodo-rpc/client", version = "0.1.1" }
+derive_more = "0.99"
+csv = "1.1"
