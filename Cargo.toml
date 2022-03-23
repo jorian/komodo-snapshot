@@ -12,3 +12,11 @@ readme = "README.md"
 komodo-rpc = { path = "../rust-komodo-rpc/client", version = "0.1.1" }
 derive_more = "0.99"
 csv = "1.1"
+
+[[bin]]
+name = "early_adopter_snapshot"
+path = "src/main.rs"
+
+[lib]
+name = "snapshot"
+path = "src/lib.rs"

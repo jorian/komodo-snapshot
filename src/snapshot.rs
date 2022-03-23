@@ -5,6 +5,7 @@ use std::path::PathBuf;
 
 #[derive(Debug, Clone)]
 pub struct Snapshot {
+    pub height: u64,
     pub chain: String,
     pub addresses: Vec<Address>,
     pub amount_in_snapshot: f64,
@@ -93,13 +94,18 @@ impl<'a> SnapshotBuilder<'a> {
 
         if let Some(path) = &self.csv_location {
             let mut writer = csv::Writer::from_path(&path)?;
-            writer.write_record(&["address", "amount"]);
+            writer
+                .write_record(&["address", "amount"])
+                .expect("a written first row in csv");
             for address in &addresses {
-                writer.write_record(&[&address.addr, &address.amount.to_string()]);
+                writer
+                    .write_record(&[&address.addr, &address.amount.to_string()])
+                    .expect("a written csv line");
             }
         }
 
         Ok(Snapshot {
+            height: snapshot.ending_height,
             chain: self.chain.clone(),
             addresses,
             amount_in_snapshot: snapshot.total,
@@ -130,10 +136,10 @@ mod tests {
     use crate::snapshot::Snapshot;
     #[test]
     fn it_works() {
-        let snapshot = Snapshot::builder()
-            .on_chain("KMD")
+        let _snapshot = Snapshot::builder()
+            .on_chain("TOKEL")
             .using_threshold(1.0)
-            .store_in_csv("./output.csv")
+            // .store_in_csv("./output.csv")
             .take();
     }
 }
